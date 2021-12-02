@@ -114,3 +114,55 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+const articleDiv = document.querySelector('.articles');
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+
+  //elements
+const article = document.createElement('div');
+const artTitle = document.createElement('h2');
+const artDate = document.createElement('p');
+const firstPara = document.createElement('p');
+const secondPara = document.createElement('p');
+const thirdPara = document.createElement('p');
+const expandBtn = document.createElement('span');
+
+//structure
+article.appendChild(artTitle);
+article.appendChild(artDate);
+article.appendChild(firstPara);
+article.appendChild(secondPara);
+article.appendChild(thirdPara);
+article.appendChild(expandBtn);
+
+//content
+artTitle.textContent = title;
+artDate.textContent = date;
+firstPara.textContent = firstParagraph;
+secondPara.textContent = secondParagraph;
+thirdPara.textContent = thirdParagraph;
+expandBtn.setAttribute('src', './assets/menu.png');
+
+//button
+expandBtn.addEventListener('click', () => {
+  article.classList.toggle('article-open');
+})
+
+return article;
+};
+
+//Test
+
+const testArticle = articleMaker({ title: 'life the unicerse and everything', date: '42', firstParagraph: 'is that it?', secondParagraph: 'yes 42 that is the answer', thirdParagraph: 'to the ultimate question' });
+articleDiv.appendChild(testArticle);
+
+
+//array
+const articleElements = data.map(info => {
+  return articleMaker(info);
+});
+articleElements.forEach(elem => {
+  articleDiv.appendChild(elem);
+}); 
